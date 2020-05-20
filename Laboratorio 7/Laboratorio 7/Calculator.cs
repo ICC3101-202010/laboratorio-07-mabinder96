@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Laboratorio_7
 {
+
+    [Serializable]
     public partial class Calculator : Form
     {
+
         decimal result = 0;
         string br="0";
         string operation="";
+        string oper2 = "";
         bool operperf = false;
         
         
@@ -38,7 +35,7 @@ namespace Laboratorio_7
             textBox1.Text += button.Text;
         }
 
-        private void dell_Click(object sender, EventArgs e)
+        private void Dell_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length > 1)
             {
@@ -59,15 +56,13 @@ namespace Laboratorio_7
             {
                 result = decimal.Parse(textBox1.Text);
                 operationlebel.Text = result + " " + operation + " ";
+                oper2 = result + " " + operation + " ";
                 operperf = true;
             }
             catch (SystemException)
             {
                 textBox1.Text = "SyntaxERROR";
-            }
-            
-            
-            
+            }    
         }
 
         private void AC_Click(object sender, EventArgs e)
@@ -81,11 +76,14 @@ namespace Laboratorio_7
             br = "0";
             operationlebel.Text = "";
             result = 0;
+            textBoxhistorial.ResetText();
+
         }
 
-        private void igual_Click(object sender, EventArgs e)
+        private void Igual_Click(object sender, EventArgs e)
         {
             operationlebel.Text += textBox1.Text;
+            oper2 += textBox1.Text;
             switch (operation)
             {
                 case "+":
@@ -93,9 +91,10 @@ namespace Laboratorio_7
                     {
                         textBox1.Text = (result + decimal.Parse(textBox1.Text)).ToString();
                         br = textBox1.Text;
+                        oper2 += " = " + textBox1.Text;
+
+                        textBoxhistorial.AppendText(oper2 + Environment.NewLine);
                         operperf = true;
-
-
 
                     }
                     catch (SystemException)
@@ -110,6 +109,8 @@ namespace Laboratorio_7
                     {
                         textBox1.Text = (result - decimal.Parse(textBox1.Text)).ToString();
                         br = textBox1.Text;
+                        oper2 += " = " + textBox1.Text;
+                        textBoxhistorial.AppendText(oper2 + Environment.NewLine);
                         operperf = true;
 
                     }
@@ -124,6 +125,8 @@ namespace Laboratorio_7
                     {
                         textBox1.Text = (result / decimal.Parse(textBox1.Text)).ToString();
                         br = textBox1.Text;
+                        oper2 += " = " + textBox1.Text;
+                        textBoxhistorial.AppendText(oper2+ Environment.NewLine);
                         operperf = true;
 
                     }
@@ -144,6 +147,8 @@ namespace Laboratorio_7
                     {
                         textBox1.Text = (result * decimal.Parse(textBox1.Text)).ToString();
                         br = textBox1.Text;
+                        oper2 += " = " + textBox1.Text;
+                        textBoxhistorial.AppendText(oper2 + Environment.NewLine);
                         operperf = true;
 
 
@@ -174,14 +179,35 @@ namespace Laboratorio_7
         }
         
 
-        private void ans_Click(object sender, EventArgs e)
+        private void Ans_Click(object sender, EventArgs e)
         {
             textBox1.Text =br;
         }
 
-        private void history_Click(object sender, EventArgs e)
+        private void History_Click(object sender, EventArgs e)
         {
-            historialpanel.Visible = true;
+
+
+            if (historialpanel.Visible == false)
+            {
+                historialpanel.Visible = true;
+                textBoxhistorial.Visible = true;
+                deletehistorial.Visible = true;
+                historialtitle.Visible = true;
+            }
+            else
+            {
+                historialpanel.Visible = false;
+                textBoxhistorial.Visible = false;
+                deletehistorial.Visible = false;
+                historialtitle.Visible = false;
+            }
+
+        }
+
+        private void Deletehistorial_Click(object sender, EventArgs e)
+        {
+            textBoxhistorial.ResetText();
         }
     }
 }

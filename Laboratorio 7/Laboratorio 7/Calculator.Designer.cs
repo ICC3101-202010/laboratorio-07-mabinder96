@@ -53,6 +53,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.operationlebel = new System.Windows.Forms.Label();
             this.historialpanel = new System.Windows.Forms.Panel();
+            this.textBoxhistorial = new System.Windows.Forms.TextBox();
+            this.deletehistorial = new System.Windows.Forms.Button();
+            this.historialtitle = new System.Windows.Forms.TextBox();
+            this.historialpanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // N7
@@ -185,7 +189,7 @@
             this.igual.TabIndex = 11;
             this.igual.Text = "=";
             this.igual.UseVisualStyleBackColor = true;
-            this.igual.Click += new System.EventHandler(this.igual_Click);
+            this.igual.Click += new System.EventHandler(this.Igual_Click);
             // 
             // suma
             // 
@@ -240,7 +244,7 @@
             this.history.TabIndex = 16;
             this.history.Text = "HISTORIAL";
             this.history.UseVisualStyleBackColor = true;
-            this.history.Click += new System.EventHandler(this.history_Click);
+            this.history.Click += new System.EventHandler(this.History_Click);
             // 
             // AC
             // 
@@ -273,7 +277,7 @@
             this.dell.TabIndex = 19;
             this.dell.Text = "Dell";
             this.dell.UseVisualStyleBackColor = true;
-            this.dell.Click += new System.EventHandler(this.dell_Click);
+            this.dell.Click += new System.EventHandler(this.Dell_Click);
             // 
             // ans
             // 
@@ -284,7 +288,7 @@
             this.ans.TabIndex = 20;
             this.ans.Text = "Ans";
             this.ans.UseVisualStyleBackColor = true;
-            this.ans.Click += new System.EventHandler(this.ans_Click);
+            this.ans.Click += new System.EventHandler(this.Ans_Click);
             // 
             // textBox1
             // 
@@ -300,7 +304,7 @@
             this.operationlebel.AutoSize = true;
             this.operationlebel.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.operationlebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationlebel.Location = new System.Drawing.Point(18, 58);
+            this.operationlebel.Location = new System.Drawing.Point(36, 47);
             this.operationlebel.Name = "operationlebel";
             this.operationlebel.Size = new System.Drawing.Size(0, 20);
             this.operationlebel.TabIndex = 22;
@@ -308,17 +312,53 @@
             // historialpanel
             // 
             this.historialpanel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.historialpanel.Controls.Add(this.historialtitle);
+            this.historialpanel.Controls.Add(this.deletehistorial);
+            this.historialpanel.Controls.Add(this.textBoxhistorial);
             this.historialpanel.Location = new System.Drawing.Point(22, 12);
             this.historialpanel.Name = "historialpanel";
             this.historialpanel.Size = new System.Drawing.Size(412, 435);
             this.historialpanel.TabIndex = 23;
             this.historialpanel.Visible = false;
             // 
+            // textBoxhistorial
+            // 
+            this.textBoxhistorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxhistorial.Location = new System.Drawing.Point(0, 35);
+            this.textBoxhistorial.Multiline = true;
+            this.textBoxhistorial.Name = "textBoxhistorial";
+            this.textBoxhistorial.Size = new System.Drawing.Size(409, 341);
+            this.textBoxhistorial.TabIndex = 0;
+            this.textBoxhistorial.Visible = false;
+            // 
+            // deletehistorial
+            // 
+            this.deletehistorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deletehistorial.Location = new System.Drawing.Point(201, 382);
+            this.deletehistorial.Name = "deletehistorial";
+            this.deletehistorial.Size = new System.Drawing.Size(211, 38);
+            this.deletehistorial.TabIndex = 1;
+            this.deletehistorial.Text = "Borrar historial";
+            this.deletehistorial.UseVisualStyleBackColor = true;
+            this.deletehistorial.Visible = false;
+            this.deletehistorial.Click += new System.EventHandler(this.Deletehistorial_Click);
+            // 
+            // historialtitle
+            // 
+            this.historialtitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.historialtitle.Location = new System.Drawing.Point(0, 0);
+            this.historialtitle.Name = "historialtitle";
+            this.historialtitle.Size = new System.Drawing.Size(409, 26);
+            this.historialtitle.TabIndex = 2;
+            this.historialtitle.Text = "Historial";
+            this.historialtitle.Visible = false;
+            // 
             // Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(446, 459);
+            this.Controls.Add(this.history);
             this.Controls.Add(this.historialpanel);
             this.Controls.Add(this.operationlebel);
             this.Controls.Add(this.textBox1);
@@ -326,12 +366,10 @@
             this.Controls.Add(this.dell);
             this.Controls.Add(this.C);
             this.Controls.Add(this.AC);
-            this.Controls.Add(this.history);
             this.Controls.Add(this.dividir);
             this.Controls.Add(this.multiplicar);
             this.Controls.Add(this.resta);
             this.Controls.Add(this.suma);
-            this.Controls.Add(this.igual);
             this.Controls.Add(this.Decimal);
             this.Controls.Add(this.N0);
             this.Controls.Add(this.N9);
@@ -343,12 +381,15 @@
             this.Controls.Add(this.N8);
             this.Controls.Add(this.N3);
             this.Controls.Add(this.N7);
+            this.Controls.Add(this.igual);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Calculator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
+            this.historialpanel.ResumeLayout(false);
+            this.historialpanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,5 +421,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label operationlebel;
         private System.Windows.Forms.Panel historialpanel;
+        private System.Windows.Forms.TextBox textBoxhistorial;
+        private System.Windows.Forms.Button deletehistorial;
+        private System.Windows.Forms.TextBox historialtitle;
     }
 }
